@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.demo.dao.IParamConfigDao">
+
+	<select id="selectConfigModel" parameterType="java.util.Map" resultType="com.demo.model.ParamConfig">
+  		select config_name,config_desc,config_value,config_index 
+  		from tb_paramconfig
+  		where 1=1 
+  		<if test="config_index != null ">
+  			and config_index=#{config_index}
+  		</if>
+  		<if test="config_name != null">
+  			and config_name=#{config_name}
+  		</if>
+		order by config_index,config_name,config_value
+  	</select>
+ 	
+  	<update id="updateConfigModel" parameterType="com.demo.model.ParamConfig">
+  		update tb_paramconfig set config_desc=#{config_desc},config_value=#{config_value},
+  		config_index=#{config_index}
+  		where config_name=#{config_name}
+  	</update>
+
+  	<insert id="insertConfigModel" parameterType="com.demo.model.ParamConfig">
+  		insert into tb_paramconfig
+  		(config_name,config_desc,config_value,config_index) 
+  		values(#{config_name}, #{config_desc}, #{config_value}, #{config_index})
+  	</insert>
+  	
+  	<delete id="deleteConfigModel" parameterType="com.demo.model.ParamConfig">
+  		delete from tb_paramconfig where config_name=#{config_name}
+  	</delete>
+  	
+    <!--根据字段获取字典 -->
+    <select id="selectAllConfigData" parameterType="java.lang.String" resultType="com.demo.model.ParamConfig">
+       select config_name,config_desc,config_value,config_index from tb_paramconfig where 1=1;
+    </select>
+
+</mapper>
