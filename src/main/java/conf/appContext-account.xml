@@ -12,6 +12,13 @@
     http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
     http://www.springframework.org/schema/tx
     http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!--开启注解配置-->
+	<context:annotation-config/>
+	<context:component-scan base-package="com.demo.service">
+		<!--去掉spring配置的重复扫描，spring-mvc中已经配置了@Controller的扫描-->
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
     
     <bean id="IParamConfigService" class="com.demo.service.impl.ParamConfigServiceImpl" init-method="selectAllConfigData">
 		<property name="IParamConfigDao" ref="IParamConfigDao" />
