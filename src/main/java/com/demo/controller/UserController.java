@@ -59,7 +59,7 @@ public class UserController {
      /**
       * 添加用户保存
       * @param model
-      * @param entity
+      * @param user
       * @param bindingResult
       * @return
       */
@@ -141,7 +141,7 @@ public class UserController {
     /**
      * 删除多个用户
      * @param model
-     * @param userIds
+     * @param user_id
      * @param pageNO
      * @param redirectAttributes
      * @return
